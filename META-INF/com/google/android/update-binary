@@ -545,8 +545,8 @@ if [ -f banner ]; then
 fi;
 
 KERNEL_STRING="$(file_getprop anykernel.sh kernel.string)";
-ui_print "📢🌟 [ INSTALLING KERNEL ] 🌟📢";
-ui_print "🌐 Kernel: $KERNEL_STRING";
+ui_print "[ INSTALLING KERNEL ]";
+ui_print "Kernel: $KERNEL_STRING";
 
 if [ -f version ]; then
   ui_print "----------------------------";
@@ -554,7 +554,7 @@ if [ -f version ]; then
   ui_print "----------------------------";
 fi;
 
-ui_print "👤 AnyKernel3 by osm0sis @ xda-developers 👤";
+ui_print "AnyKernel3 by osm0sis @ xda-developers";
 grep -oE 'AK_BASE.*' META-INF/com/google/android/updater-script >&2;
 ui_print "";
 
@@ -565,26 +565,28 @@ do_versioncheck;
 do_levelcheck;
 do_vendorlevelcheck;
 
-ui_print "📁 Installing kernel files...";
+ui_print "Installing kernel files...";
+ui_print "";
 CORE=$(grep -oE 'ak.*core.sh' anykernel.sh);
 [ -f tools/$CORE ] || ln -s $AKHOME/tools/ak*-core.sh $AKHOME/tools/$CORE;
 ash anykernel.sh;
 if [ $? != 0 ]; then
-  ui_print "❌ Installation failed! Aborting...";
+  ui_print "Installation failed! Aborting...";
   abort;
 fi;
 
 do_modules;
 
 debugging;
-ui_print "🌟 Installation complete! 🌟";
+ui_print "";
+ui_print "Installation complete!";
 restore_env;
 
 if [ "$(file_getprop anykernel.sh do.cleanup)" == 1 ]; then
-  ui_print "💩 Cleaning up temporary files...";
+  ui_print "Cleaning up temporary files...";
   cleanup;
 fi;
 
-ui_print "🎉 Done! Enjoy your new kernel! 🎉";
+ui_print "Done! Enjoy Your new kernel! ";
 export PATH="$OLD_PATH";
 unset OLD_PATH OUTFD ZIPFILE;
